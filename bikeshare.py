@@ -15,15 +15,50 @@ def get_filters():
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
+    #declare/define filter values as lists and filter variables
+    city = ''
+    date_filter = ''
+    month = 'all'
+    day = 'all'
+    
     print('Hello! Let\'s explore some US bikeshare data!')
-    # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
+    # get user input for city (chicago, new york city, washington). 
+    counter = 0
+    while city not in CITY_LIST: 
+        if counter == 0:
+            city = str(input('Would you like to see data for {}?'.format(CITY_LIST))).strip('\'\". ').title()
+        else:
+            city = str(input('Oh, there was a typo. Please repeat your choice: {}!'.format(CITY_LIST))).strip('\'\". ').title()
+        counter +=1
+        
+    # get user input for date filter. 
+    counter = 0
+    while date_filter not in DATE_FILTER_LIST: 
+        if counter == 0:
+            date_filter = str(input('Would you like to filter the data by {}'.format(DATE_FILTER_LIST))).strip('\'\". ').lower()
+        else:
+            date_filter = str(input('Oh, there was a typo. Please repeat your choice: {}!'.format(DATE_FILTER_LIST))).strip('\'\". ').lower()
+        counter +=1 
 
-
-    # get user input for month (all, january, february, ... , june)
-
-
-    # get user input for day of week (all, monday, tuesday, ... sunday)
-
+    if date_filter in ['month','both']:
+        # get user input for month (january, february, ... , june)
+        counter = 0
+        while month not in MONTH_LIST: 
+            if counter == 0:
+                month = str(input('which month {}?'.format(MONTH_LIST))).strip('\'\". ').title()
+            else:
+                month = str(input('Oh, there was a typo. Please repeat your choice: {}!'.format(MONTH_LIST))).strip('\'\". ').title()
+            counter +=1
+    
+    if date_filter in ['day','both']:
+        # get user input for day (monday, tuesday, ..., friday)
+        counter = 0
+        while day not in DAY_LIST: 
+            if counter == 0:
+                day = str(input('Which day {}?'.format(DAY_LIST))).strip('\'\". ').title()
+            else:
+                day = str(input('Oh, there was a typo. Please repeat your choice: {}!'.format(DAY_LIST))).strip('\'\". ').title()
+            counter +=1
 
     print('-'*40)
     return city, month, day
